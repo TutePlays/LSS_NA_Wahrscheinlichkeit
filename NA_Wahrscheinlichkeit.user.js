@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zeige NA Wahrscheinlichkeit
 // @namespace    https://youtube.com/tuteplays
-// @version      1.2
+// @version      1.3
 // @description  Zeigt neben der Anzahl verletzter Personen in der Einsatzmaske die Wahrscheinlichkeit für einen Notarzt.
 // @author       TutePlays, Anpassungen von Jan und Lennard
 // @match        https://www.leitstellenspiel.de/missions/*
