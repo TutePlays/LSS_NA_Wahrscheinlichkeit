@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zeige NA Wahrscheinlichkeit
 // @namespace    https://youtube.com/tuteplays
-// @version      1.3
+// @version      1.4
 // @description  Zeigt neben der Anzahl verletzter Personen in der Einsatzmaske die Wahrscheinlichkeit für einen Notarzt.
 // @author       TutePlays, Anpassungen von Jan und Lennard
 // @match        https://www.leitstellenspiel.de/missions/*
@@ -23,14 +23,10 @@
 
     async function init()
     {
-        if(!sessionStorage.getItem("mission_specs_cache")){
-            await $.getJSON(`https://www.leitstellenspiel.de/einsaetze.json`, data => {
-                mission_specs_cache = data;
-                sessionStorage.setItem("mission_specs_cache", JSON.stringify(data));
-            });
-        }else{
-            mission_specs_cache = JSON.parse(sessionStorage.getItem("mission_specs_cache"));
+        if(!localStorage.aMissions || JSON.parse(localStorage.aMissions).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) {
+            await $.getJSON('/einsaetze.json').done(data => localStorage.setItem('aMissions', JSON.stringify({lastUpdate: new Date().getTime(), value: data})) );
         }
+        var mission_specs_cache = JSON.parse(localStorage.aMissions).value;
         output();
     }
     init();
